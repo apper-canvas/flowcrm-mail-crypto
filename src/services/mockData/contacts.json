@@ -1,0 +1,122 @@
+[
+  {
+    "Id": 1,
+    "name": "Sarah Johnson",
+    "email": "sarah.johnson@techcorp.com",
+    "phone": "+1 (555) 123-4567",
+    "company": "TechCorp Solutions",
+    "position": "VP of Sales",
+    "lastActivity": "2024-01-15T10:30:00Z",
+    "createdAt": "2024-01-01T09:00:00Z",
+    "tags": ["enterprise", "hot-lead"],
+    "notes": "Interested in our enterprise solution. Follow up on Q1 budget."
+  },
+  {
+    "Id": 2,
+    "name": "Michael Chen",
+    "email": "m.chen@innovatetech.io",
+    "phone": "+1 (555) 234-5678",
+    "company": "InnovateTech",
+    "position": "CTO",
+    "lastActivity": "2024-01-14T15:45:00Z",
+    "createdAt": "2023-12-15T14:20:00Z",
+    "tags": ["technical", "decision-maker"],
+    "notes": "Evaluating technical requirements. Scheduled demo for next week."
+  },
+  {
+    "Id": 3,
+    "name": "Emily Rodriguez",
+    "email": "emily.r@startupventures.com",
+    "phone": "+1 (555) 345-6789",
+    "company": "Startup Ventures",
+    "position": "Operations Manager",
+    "lastActivity": "2024-01-13T11:20:00Z",
+    "createdAt": "2024-01-05T16:45:00Z",
+    "tags": ["startup", "budget-conscious"],
+    "notes": "Looking for cost-effective solution. Price sensitivity noted."
+  },
+  {
+    "Id": 4,
+    "name": "David Park",
+    "email": "david.park@globalinc.com",
+    "phone": "+1 (555) 456-7890",
+    "company": "Global Inc",
+    "position": "Director of IT",
+    "lastActivity": "2024-01-12T09:15:00Z",
+    "createdAt": "2023-11-20T13:30:00Z",
+    "tags": ["enterprise", "integration-focused"],
+    "notes": "Requires extensive integration capabilities. Pilot program approved."
+  },
+  {
+    "Id": 5,
+    "name": "Lisa Thompson",
+    "email": "lisa.thompson@creativeagency.com",
+    "phone": "+1 (555) 567-8901",
+    "company": "Creative Agency",
+    "position": "Account Director",
+    "lastActivity": "2024-01-11T14:30:00Z",
+    "createdAt": "2024-01-08T10:15:00Z",
+    "tags": ["creative", "mid-market"],
+    "notes": "Impressed with creative features. Waiting for final approval."
+  },
+  {
+    "Id": 6,
+    "name": "Robert Wilson",
+    "email": "r.wilson@manufacturing.com",
+    "phone": "+1 (555) 678-9012",
+    "company": "Wilson Manufacturing",
+    "position": "Plant Manager",
+    "lastActivity": "2024-01-10T16:00:00Z",
+    "createdAt": "2023-12-01T08:45:00Z",
+    "tags": ["manufacturing", "process-improvement"],
+    "notes": "Focused on operational efficiency. ROI analysis requested."
+  },
+  {
+    "Id": 7,
+    "name": "Amanda Foster",
+    "email": "amanda@healthtech.com",
+    "phone": "+1 (555) 789-0123",
+    "company": "HealthTech Solutions",
+    "position": "Product Manager",
+    "lastActivity": "2024-01-09T12:45:00Z",
+    "createdAt": "2023-12-20T11:30:00Z",
+    "tags": ["healthcare", "compliance-focused"],
+    "notes": "Compliance requirements are critical. HIPAA evaluation needed."
+  },
+  {
+    "Id": 8,
+    "name": "James Miller",
+    "email": "james.miller@retailchain.com",
+    "phone": "+1 (555) 890-1234",
+    "company": "Retail Chain Corp",
+    "position": "IT Manager",
+    "lastActivity": "2024-01-08T10:20:00Z",
+    "createdAt": "2024-01-03T15:20:00Z",
+    "tags": ["retail", "scalability"],
+    "notes": "Multi-location deployment needed. Scalability is key concern."
+  },
+  {
+    "Id": 9,
+    "name": "Jennifer Lee",
+    "email": "j.lee@financialservices.com",
+    "phone": "+1 (555) 901-2345",
+    "company": "Financial Services Group",
+    "position": "VP of Operations",
+    "lastActivity": "2024-01-07T13:30:00Z",
+    "createdAt": "2023-11-15T09:45:00Z",
+    "tags": ["financial", "security-focused"],
+    "notes": "Security and compliance are top priorities. SOC 2 compliance verified."
+  },
+  {
+    "Id": 10,
+    "name": "Mark Anderson",
+    "email": "mark.anderson@consultingfirm.com",
+    "phone": "+1 (555) 012-3456",
+    "company": "Anderson Consulting",
+    "position": "Senior Partner",
+    "lastActivity": "2024-01-06T11:10:00Z",
+    "createdAt": "2023-12-10T14:00:00Z",
+    "tags": ["consulting", "advisory"],
+    "notes": "Potential strategic partnership opportunity. High-value prospect."
+  }
+]

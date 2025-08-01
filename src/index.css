@@ -1,0 +1,95 @@
+@import 'react-toastify/dist/ReactToastify.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    background-color: #F8F9FB;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+}
+
+@layer components {
+  .gradient-primary {
+    background: linear-gradient(135deg, #5B5FDE 0%, #8B92E8 100%);
+  }
+  
+  .gradient-accent {
+    background: linear-gradient(135deg, #00D4AA 0%, #22F9F5 100%);
+  }
+  
+  .gradient-text {
+    background: linear-gradient(135deg, #5B5FDE 0%, #8B92E8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+  
+  .table-row-hover {
+    transition: all 0.2s ease-out;
+  }
+  
+  .table-row-hover:hover {
+    background-color: #f8f9ff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(91, 95, 222, 0.1);
+  }
+}
+
+/* Toast Customization */
+.Toastify__toast-container {
+  top: 1rem;
+  right: 1rem;
+  width: 400px;
+}
+
+.Toastify__toast {
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  padding: 16px;
+}
+
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #00C48C 0%, #00D4AA 100%);
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #FF4747 0%, #FF6B6B 100%);
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #0095FF 0%, #5B5FDE 100%);
+}
+
+.Toastify__progress-bar {
+  background: rgba(255, 255, 255, 0.7);
+}
