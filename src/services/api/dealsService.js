@@ -86,9 +86,77 @@ class DealsService {
     return probabilities[stage] || 25;
   }
 
-  async getByStage(stage) {
+async getByStage(stage) {
     await this.delay();
     return this.deals.filter(deal => deal.stage === stage).map(deal => ({ ...deal }));
+  }
+
+  async getAnalytics() {
+    await this.delay();
+    
+    const activeDeals = this.deals.filter(deal => deal.stage !== 'Closed Won' && deal.stage !== 'Closed Lost');
+    const totalPipelineValue = activeDeals.reduce((sum, deal) => sum + deal.value, 0);
+    const activeDealsCount = activeDeals.length;
+    
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+    
+    const monthlyClosedDeals = this.deals.filter(deal => {
+      if (deal.stage !== 'Closed Won') return false;
+      const closeDate = new Date(deal.expectedCloseDate);
+      return closeDate.getMonth() === currentMonth && closeDate.getFullYear() === currentYear;
+    });
+    
+    const winRate = this.getWinRate();
+    
+    return {
+      totalPipelineValue,
+      activeDealsCount,
+      monthlyClosedDealsCount: monthlyClosedDeals.length,
+      monthlyClosedDealsValue: monthlyClosedDeals.reduce((sum, deal) => sum + deal.value, 0),
+      winRate
+    };
+  }
+
+  async getPipelineData() {
+    await this.delay();
+    
+    const stages = ['Lead', 'Qualified', 'Proposal', 'Closed Won'];
+    const stageData = stages.map(stage => {
+      const stageDeals = this.deals.filter(deal => deal.stage === stage);
+      const stageValue = stageDeals.reduce((sum, deal) => sum + deal.value, 0);
+      return {
+        stage,
+        count: stageDeals.length,
+        value: stageValue
+      };
+    });
+    
+    return stageData;
+  }
+
+  getWinRate() {
+    const closedDeals = this.deals.filter(deal => 
+      deal.stage === 'Closed Won' || deal.stage === 'Closed Lost'
+    );
+    
+    if (closedDeals.length === 0) return 0;
+    
+    const wonDeals = closedDeals.filter(deal => deal.stage === 'Closed Won');
+    return Math.round((wonDeals.length / closedDeals.length) * 100);
+  }
+
+  async getMonthlyClosedDeals() {
+    await this.delay();
+    
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+    
+    return this.deals.filter(deal => {
+      if (deal.stage !== 'Closed Won') return false;
+      const closeDate = new Date(deal.expectedCloseDate);
+      return closeDate.getMonth() === currentMonth && closeDate.getFullYear() === currentYear;
+    }).map(deal => ({ ...deal }));
   }
 }
 
