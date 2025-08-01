@@ -1,11 +1,14 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import Chart from "react-apexcharts";
-import { Activity, Building2, DollarSign, TrendingDown, TrendingUp, Users } from "lucide-react";
-import { dealsService } from "@/services/api/dealsService";
-import { activitiesService } from "@/services/api/activitiesService";
-import { companiesService } from "@/services/api/companiesService";
-import { contactsService } from "@/services/api/contactsService";
-import Loading from "@/components/ui/Loading";
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import Chart from 'react-apexcharts'
+import { Activity, Building2, DollarSign, TrendingDown, TrendingUp, Users } from 'lucide-react'
+import DealsService from "@/services/api/dealsService";
+import { activitiesService } from '@/services/api/activitiesService'
+import { companiesService } from '@/services/api/companiesService'
+import { contactsService } from '@/services/api/contactsService'
+import Loading from '@/components/ui/Loading'
+
+// Create instance of DealsService
+const dealsService = new DealsService();
 import Error from "@/components/ui/Error";
 
 const AnalyticsPage = () => {
