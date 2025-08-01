@@ -1,0 +1,191 @@
+[
+  {
+    "Id": 1,
+    "contactId": 1,
+    "type": "Email",
+    "description": "Sent follow-up email regarding enterprise solution proposal",
+    "timestamp": "2024-01-15T10:30:00Z",
+    "createdBy": "John Smith",
+    "status": "completed"
+  },
+  {
+    "Id": 2,
+    "contactId": 1,
+    "type": "Call",
+    "description": "Initial discovery call - discussed requirements and timeline",
+    "timestamp": "2024-01-12T14:15:00Z",
+    "createdBy": "Sarah Wilson",
+    "status": "completed"
+  },
+  {
+    "Id": 3,
+    "contactId": 1,
+    "type": "Meeting",
+    "description": "Product demo presentation - enterprise features showcase",
+    "timestamp": "2024-01-10T09:00:00Z",
+    "createdBy": "Mike Johnson",
+    "status": "completed"
+  },
+  {
+    "Id": 4,
+    "contactId": 2,
+    "type": "Email",
+    "description": "Technical documentation shared for integration review",
+    "timestamp": "2024-01-14T15:45:00Z",
+    "createdBy": "Alex Chen",
+    "status": "completed"
+  },
+  {
+    "Id": 5,
+    "contactId": 2,
+    "type": "Meeting",
+    "description": "Technical evaluation meeting scheduled for next week",
+    "timestamp": "2024-01-13T11:30:00Z",
+    "createdBy": "Sarah Wilson",
+    "status": "scheduled"
+  },
+  {
+    "Id": 6,
+    "contactId": 3,
+    "type": "Call",
+    "description": "Budget discussion - exploring cost-effective options",
+    "timestamp": "2024-01-13T11:20:00Z",
+    "createdBy": "Tom Davis",
+    "status": "completed"
+  },
+  {
+    "Id": 7,
+    "contactId": 3,
+    "type": "Note",
+    "description": "Price sensitivity noted - prepare startup-friendly proposal",
+    "timestamp": "2024-01-11T16:45:00Z",
+    "createdBy": "Sarah Wilson",
+    "status": "completed"
+  },
+  {
+    "Id": 8,
+    "contactId": 4,
+    "type": "Meeting",
+    "description": "Integration requirements review - pilot program approved",
+    "timestamp": "2024-01-12T09:15:00Z",
+    "createdBy": "David Kim",
+    "status": "completed"
+  },
+  {
+    "Id": 9,
+    "contactId": 4,
+    "type": "Task",
+    "description": "Prepare integration documentation for pilot program",
+    "timestamp": "2024-01-16T10:00:00Z",
+    "createdBy": "Alex Chen",
+    "status": "pending"
+  },
+  {
+    "Id": 10,
+    "contactId": 5,
+    "type": "Email",
+    "description": "Creative features presentation deck sent for review",
+    "timestamp": "2024-01-11T14:30:00Z",
+    "createdBy": "Emma Taylor",
+    "status": "completed"
+  },
+  {
+    "Id": 11,
+    "contactId": 5,
+    "type": "Call",
+    "description": "Follow-up call - waiting for final approval from team",
+    "timestamp": "2024-01-09T10:15:00Z",
+    "createdBy": "Sarah Wilson",
+    "status": "completed"
+  },
+  {
+    "Id": 12,
+    "contactId": 6,
+    "type": "Meeting",
+    "description": "ROI analysis presentation - operational efficiency focus",
+    "timestamp": "2024-01-10T16:00:00Z",
+    "createdBy": "John Smith",
+    "status": "completed"
+  },
+  {
+    "Id": 13,
+    "contactId": 6,
+    "type": "Task",
+    "description": "Prepare detailed ROI calculation for manufacturing use case",
+    "timestamp": "2024-01-17T09:00:00Z",
+    "createdBy": "Mike Johnson",
+    "status": "pending"
+  },
+  {
+    "Id": 14,
+    "contactId": 7,
+    "type": "Email",
+    "description": "HIPAA compliance documentation shared",
+    "timestamp": "2024-01-09T12:45:00Z",
+    "createdBy": "David Kim",
+    "status": "completed"
+  },
+  {
+    "Id": 15,
+    "contactId": 7,
+    "type": "Meeting",
+    "description": "Compliance review meeting - healthcare requirements discussion",
+    "timestamp": "2024-01-08T14:30:00Z",
+    "createdBy": "Sarah Wilson",
+    "status": "completed"
+  },
+  {
+    "Id": 16,
+    "contactId": 8,
+    "type": "Call",
+    "description": "Multi-location deployment strategy discussion",
+    "timestamp": "2024-01-08T10:20:00Z",
+    "createdBy": "Alex Chen",
+    "status": "completed"
+  },
+  {
+    "Id": 17,
+    "contactId": 8,
+    "type": "Note",
+    "description": "Scalability requirements documented - 50+ locations",
+    "timestamp": "2024-01-07T15:30:00Z",
+    "createdBy": "Tom Davis",
+    "status": "completed"
+  },
+  {
+    "Id": 18,
+    "contactId": 9,
+    "type": "Meeting",
+    "description": "Security audit results presentation - SOC 2 compliance verified",
+    "timestamp": "2024-01-07T13:30:00Z",
+    "createdBy": "David Kim",
+    "status": "completed"
+  },
+  {
+    "Id": 19,
+    "contactId": 9,
+    "type": "Email",
+    "description": "Security compliance documentation package delivered",
+    "timestamp": "2024-01-05T11:45:00Z",
+    "createdBy": "Sarah Wilson",
+    "status": "completed"
+  },
+  {
+    "Id": 20,
+    "contactId": 10,
+    "type": "Meeting",
+    "description": "Strategic partnership discussion - high-value opportunity",
+    "timestamp": "2024-01-06T11:10:00Z",
+    "createdBy": "John Smith",
+    "status": "completed"
+  },
+  {
+    "Id": 21,
+    "contactId": 10,
+    "type": "Task",
+    "description": "Prepare partnership proposal presentation",
+    "timestamp": "2024-01-18T14:00:00Z",
+    "createdBy": "Emma Taylor",
+    "status": "pending"
+  }
+]
