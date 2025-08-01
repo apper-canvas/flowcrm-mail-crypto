@@ -68,5 +68,4 @@ class ContactsService {
   }
 }
 
-export default ContactsService;
 export default new ContactsService();
