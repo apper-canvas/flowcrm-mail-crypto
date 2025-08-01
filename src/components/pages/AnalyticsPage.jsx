@@ -2,13 +2,14 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import Chart from "react-apexcharts";
 import { Activity, Building2, DollarSign, TrendingDown, TrendingUp, Users } from "lucide-react";
 import DealsService from "@/services/api/dealsService";
-import { activitiesService } from "@/services/api/activitiesService";
+import ActivitiesService from "@/services/api/activitiesService";
 import { companiesService } from "@/services/api/companiesService";
 import ContactsService from "@/services/api/contactsService";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 
 const dealsService = new DealsService();
+const activitiesService = new ActivitiesService();
 const contactsService = new ContactsService();
 const AnalyticsPage = () => {
   const [loading, setLoading] = useState(true);
