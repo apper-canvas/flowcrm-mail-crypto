@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import Chart from "react-apexcharts";
+import dealsService from "@/services/api/dealsService";
 import ApperIcon from "@/components/ApperIcon";
 import Header from "@/components/organisms/Header";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
-import dealsService from "@/services/api/dealsService";
-import { toast } from "react-toastify";
-import Chart from "react-apexcharts";
 
 const AnalyticsPage = ({ onMenuClick }) => {
   const [analytics, setAnalytics] = useState(null);
@@ -46,9 +46,10 @@ const AnalyticsPage = ({ onMenuClick }) => {
     }).format(amount);
   };
 
+// Chart configuration for pipeline funnel
   const chartOptions = {
     chart: {
-      type: 'funnel',
+      type: "funnel",
       height: 350,
       toolbar: {
         show: false
@@ -56,40 +57,38 @@ const AnalyticsPage = ({ onMenuClick }) => {
     },
     plotOptions: {
       funnel: {
-        colorScale: {
-          ranges: [
-            { from: 0, to: 25, color: '#FF6B6B' },
-            { from: 25, to: 50, color: '#FFB800' },
-            { from: 50, to: 75, color: '#00D4AA' },
-            { from: 75, to: 100, color: '#5B5FDE' }
-          ]
-        }
+        sortByValues: false,
+        pyramid: false,
+        reversed: false
       }
     },
     dataLabels: {
       enabled: true,
-      formatter: function(val, opts) {
-        return opts.w.config.series[opts.seriesIndex].name + ': ' + val;
+      formatter: function(val, opt) {
+        const stage = pipelineData?.[opt.dataPointIndex];
+        return stage ? `${stage.stage}: ${stage.count}` : '';
       },
       style: {
         fontSize: '12px',
-        fontWeight: 600
+        fontWeight: 'bold'
       }
     },
     tooltip: {
       y: {
         formatter: function(val, opts) {
-          const stage = pipelineData[opts.dataPointIndex];
-          return `${val} deals (${formatCurrency(stage?.value || 0)})`;
+          const stage = pipelineData?.[opts.dataPointIndex];
+          return stage ? `${stage.count} deals` : '';
         }
       }
-    }
+    },
+    labels: pipelineData?.map(stage => stage.stage) || []
   };
 
-  const chartSeries = pipelineData.map(stage => ({
-    name: stage.stage,
-    data: [stage.count]
-  }));
+  // Funnel charts require simple array of values, not objects
+  const chartSeries = pipelineData?.map(stage => stage.count) || [];
+
+  // Guard against empty or invalid data
+  const hasValidData = chartSeries.length > 0 && chartSeries.every(val => typeof val === 'number' && val >= 0);
 
   if (loading) return <Loading />;
   if (error) return <Error message={error} onRetry={loadAnalytics} />;
@@ -165,23 +164,31 @@ const AnalyticsPage = ({ onMenuClick }) => {
           </div>
         </div>
 
-        {/* Pipeline Funnel Chart */}
+{/* Pipeline Funnel Chart */}
         <div className="bg-white rounded-lg p-6 shadow-card">
           <div className="flex items-center mb-6">
             <ApperIcon name="BarChart3" size={20} className="text-primary-600 mr-2" />
             <h3 className="text-lg font-semibold text-gray-900">Sales Pipeline Funnel</h3>
           </div>
-          
           <div className="h-96">
-            <Chart
-              options={chartOptions}
-              series={chartSeries}
-              type="funnel"
-              height="100%"
-            />
+            {!hasValidData ? (
+              <div className="flex items-center justify-center h-full text-gray-500">
+                <div className="text-center">
+                  <p className="text-lg mb-2">No pipeline data available</p>
+                  <p className="text-sm">Data will appear here once deals are created</p>
+                </div>
+              </div>
+            ) : (
+              <Chart
+                options={chartOptions}
+                series={chartSeries}
+                type="funnel"
+                height="100%"
+              />
+            )}
           </div>
 
-          {/* Pipeline Stage Details */}
+          {/* Pipeline Stats Grid */}
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {pipelineData.map((stage, index) => (
               <div key={stage.stage} className="text-center p-4 bg-gray-50 rounded-lg">
@@ -192,6 +199,7 @@ const AnalyticsPage = ({ onMenuClick }) => {
             ))}
           </div>
         </div>
+</div>
       </div>
     </div>
   );
