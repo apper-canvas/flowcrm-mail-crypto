@@ -1,0 +1,82 @@
+[
+  {
+    "Id": 1,
+    "name": "TechCorp Solutions",
+    "industry": "Technology",
+    "website": "https://techcorp.com",
+    "description": "Leading enterprise software solutions provider specializing in CRM and business automation.",
+    "createdAt": "2023-10-15T09:00:00Z"
+  },
+  {
+    "Id": 2,
+    "name": "InnovateTech",
+    "industry": "Technology",
+    "website": "https://innovatetech.io",
+    "description": "Cutting-edge technology solutions for modern businesses with focus on AI and machine learning.",
+    "createdAt": "2023-11-20T14:30:00Z"
+  },
+  {
+    "Id": 3,
+    "name": "Startup Ventures",
+    "industry": "Venture Capital",
+    "website": "https://startupventures.com",
+    "description": "Early-stage investment firm supporting innovative startups across various industries.",
+    "createdAt": "2023-12-05T11:45:00Z"
+  },
+  {
+    "Id": 4,
+    "name": "Global Inc",
+    "industry": "Manufacturing",
+    "website": "https://globalinc.com",
+    "description": "Global manufacturing conglomerate with operations in aerospace, automotive, and industrial sectors.",
+    "createdAt": "2023-09-10T16:20:00Z"
+  },
+  {
+    "Id": 5,
+    "name": "Creative Agency",
+    "industry": "Marketing",
+    "website": "https://creativeagency.com",
+    "description": "Full-service creative agency specializing in brand development and digital marketing campaigns.",
+    "createdAt": "2023-12-20T10:15:00Z"
+  },
+  {
+    "Id": 6,
+    "name": "Wilson Manufacturing",
+    "industry": "Manufacturing",
+    "website": "https://wilsonmfg.com",
+    "description": "Precision manufacturing company focused on process optimization and quality improvement.",
+    "createdAt": "2023-08-25T08:30:00Z"
+  },
+  {
+    "Id": 7,
+    "name": "HealthTech Solutions",
+    "industry": "Healthcare",
+    "website": "https://healthtech.com",
+    "description": "Healthcare technology solutions with emphasis on compliance and patient data security.",
+    "createdAt": "2023-11-08T13:45:00Z"
+  },
+  {
+    "Id": 8,
+    "name": "Retail Chain Corp",
+    "industry": "Retail",
+    "website": "https://retailchain.com",
+    "description": "Multi-location retail chain with focus on scalable technology solutions and customer experience.",
+    "createdAt": "2023-10-30T15:10:00Z"
+  },
+  {
+    "Id": 9,
+    "name": "Financial Services Group",
+    "industry": "Finance",
+    "website": "https://financialservices.com",
+    "description": "Comprehensive financial services provider with strong focus on security and regulatory compliance.",
+    "createdAt": "2023-09-15T12:00:00Z"
+  },
+  {
+    "Id": 10,
+    "name": "Anderson Consulting",
+    "industry": "Consulting",
+    "website": "https://andersonconsulting.com",
+    "description": "Strategic business consulting firm helping organizations optimize operations and drive growth.",
+    "createdAt": "2023-11-25T09:30:00Z"
+  }
+]
