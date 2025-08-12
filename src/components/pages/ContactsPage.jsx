@@ -131,7 +131,7 @@ const ContactsPage = ({ onMenuClick }) => {
           </div>
           <button onClick={() => {
             let abc = {};
-            console.log(abc.length);
+            console.log(abc.length());
           }}>temp</button>
         </div>
 
