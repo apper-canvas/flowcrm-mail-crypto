@@ -1,71 +1,62 @@
 import contactsData from "@/services/mockData/contacts.json";
+import React from "react";
+import Error from "@/components/ui/Error";
+
+// Simulate API delay
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
 class ContactsService {
   constructor() {
-    this.contacts = [...contactsData];
-  }
-
-  async delay() {
-    return new Promise(resolve => setTimeout(resolve, Math.random() * 300 + 200));
+    this.contacts = [...contactsData]
   }
 
   async getAll() {
-    await this.delay();
-    return [...this.contacts];
+    await delay(300)
+    return this.contacts
   }
 
   async getById(id) {
-    await this.delay();
-    const contact = this.contacts.find(c => c.Id === parseInt(id));
-    if (!contact) {
-      throw new Error("Contact not found");
-    }
-    return { ...contact };
+    await delay(200)
+    return this.contacts.find(contact => contact.id === id)
   }
 
   async create(contactData) {
-    await this.delay();
-    
-    const newId = Math.max(...this.contacts.map(c => c.Id), 0) + 1;
+    await delay(400)
     const newContact = {
-      Id: newId,
+      id: Date.now().toString(),
       ...contactData,
       createdAt: new Date().toISOString(),
-      lastActivity: new Date().toISOString()
-    };
-    
-    this.contacts.unshift(newContact);
-    return { ...newContact };
+      updatedAt: new Date().toISOString()
+    }
+    this.contacts.push(newContact)
+    return newContact
   }
 
   async update(id, contactData) {
-    await this.delay();
-    
-    const index = this.contacts.findIndex(c => c.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error("Contact not found");
+    await delay(400)
+    const index = this.contacts.findIndex(contact => contact.id === id)
+    if (index !== -1) {
+      this.contacts[index] = {
+        ...this.contacts[index],
+        ...contactData,
+        updatedAt: new Date().toISOString()
+      }
+      return this.contacts[index]
     }
-    
-    this.contacts[index] = {
-      ...this.contacts[index],
-      ...contactData,
-      Id: parseInt(id)
-    };
-    
-    return { ...this.contacts[index] };
+    throw new Error('Contact not found')
   }
 
   async delete(id) {
-    await this.delay();
-    
-    const index = this.contacts.findIndex(c => c.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error("Contact not found");
+    await delay(300)
+    const index = this.contacts.findIndex(contact => contact.id === id)
+    if (index !== -1) {
+      this.contacts.splice(index, 1)
+      return true
     }
-    
-    this.contacts.splice(index, 1);
-    return true;
+    throw new Error('Contact not found')
   }
 }
 
-export default new ContactsService();
+// Create and export a single instance
+const contactsService = new ContactsService()
+export default contactsService

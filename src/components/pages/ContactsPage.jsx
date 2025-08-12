@@ -129,10 +129,6 @@ const ContactsPage = ({ onMenuClick }) => {
           <div className="text-sm text-gray-600">
             {filteredAndSortedContacts.length} of {contacts.length} contacts
           </div>
-          <button onClick={() => {
-            let abc = {};
-            console.log(abc.length());
-          }}>temp</button>
         </div>
 
         {filteredAndSortedContacts.length === 0 ? (
