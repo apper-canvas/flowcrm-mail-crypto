@@ -1,131 +1,163 @@
-import dealsData from '@/services/mockData/deals.json'
-
-// Simulate API delay
-const delay = (ms = 500) => new Promise(resolve => setTimeout(resolve, ms))
+import dealsData from "@/services/mockData/deals.json";
 
 class DealsService {
   constructor() {
-    this.deals = [...dealsData]
+    this.deals = [...dealsData];
   }
 
-  // Main method expected by AnalyticsPage - renamed from getAll()
-  async getDeals() {
-    await delay()
-    return [...this.deals]
+  async delay() {
+    return new Promise(resolve => setTimeout(resolve, Math.random() * 300 + 200));
   }
 
-  // Keep getAll() for backward compatibility
   async getAll() {
-    return this.getDeals()
+    await this.delay();
+    return [...this.deals];
   }
 
   async getById(id) {
-    await delay()
-    return this.deals.find(deal => deal.id === id) || null
+    await this.delay();
+    const deal = this.deals.find(d => d.Id === parseInt(id));
+    if (!deal) {
+      throw new Error("Deal not found");
+    }
+    return { ...deal };
   }
 
   async create(dealData) {
-    await delay()
+    await this.delay();
+    
+    const newId = Math.max(...this.deals.map(d => d.Id), 0) + 1;
     const newDeal = {
-      id: Date.now().toString(),
+      Id: newId,
+      ...dealData,
+      stage: dealData.stage || "Lead",
+      probability: this.getDefaultProbability(dealData.stage || "Lead"),
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      probability: this.getDefaultProbability(dealData.stage),
-      ...dealData
-    }
-    this.deals.push(newDeal)
-    return newDeal
+      lastActivity: new Date().toISOString()
+    };
+    
+    this.deals.unshift(newDeal);
+    return { ...newDeal };
   }
 
   async update(id, dealData) {
-    await delay()
-    const index = this.deals.findIndex(deal => deal.id === id)
-    if (index === -1) throw new Error('Deal not found')
+    await this.delay();
     
-    this.deals[index] = {
+    const index = this.deals.findIndex(d => d.Id === parseInt(id));
+    if (index === -1) {
+      throw new Error("Deal not found");
+    }
+    
+    const updatedDeal = {
       ...this.deals[index],
       ...dealData,
-      updatedAt: new Date().toISOString()
+      Id: parseInt(id),
+      lastActivity: new Date().toISOString()
+    };
+
+    // Update probability based on stage if stage changed
+    if (dealData.stage && dealData.stage !== this.deals[index].stage) {
+      updatedDeal.probability = this.getDefaultProbability(dealData.stage);
     }
-    return this.deals[index]
+    
+    this.deals[index] = updatedDeal;
+    return { ...updatedDeal };
   }
 
   async delete(id) {
-    await delay()
-    const index = this.deals.findIndex(deal => deal.id === id)
-    if (index === -1) throw new Error('Deal not found')
+    await this.delay();
     
-    const deletedDeal = this.deals.splice(index, 1)[0]
-    return deletedDeal
+    const index = this.deals.findIndex(d => d.Id === parseInt(id));
+    if (index === -1) {
+      throw new Error("Deal not found");
+    }
+    
+    this.deals.splice(index, 1);
+    return true;
   }
 
   getDefaultProbability(stage) {
     const probabilities = {
-      'New': 10,
-      'Qualified': 25,
-      'Proposal': 50,
-      'Negotiation': 75,
-      'Won': 100,
-      'Lost': 0
-    }
-    return probabilities[stage] || 10
+      "Lead": 25,
+      "Qualified": 50,
+      "Proposal": 75,
+      "Closed Won": 100
+    };
+    return probabilities[stage] || 25;
   }
 
-  async getByStage(stage) {
-    await delay()
-    return this.deals.filter(deal => deal.stage === stage)
+async getByStage(stage) {
+    await this.delay();
+    return this.deals.filter(deal => deal.stage === stage).map(deal => ({ ...deal }));
   }
 
   async getAnalytics() {
-    await delay()
-    const deals = [...this.deals]
+    await this.delay();
+    
+    const activeDeals = this.deals.filter(deal => deal.stage !== 'Closed Won' && deal.stage !== 'Closed Lost');
+    const totalPipelineValue = activeDeals.reduce((sum, deal) => sum + deal.value, 0);
+    const activeDealsCount = activeDeals.length;
+    
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+    
+    const monthlyClosedDeals = this.deals.filter(deal => {
+      if (deal.stage !== 'Closed Won') return false;
+      const closeDate = new Date(deal.expectedCloseDate);
+      return closeDate.getMonth() === currentMonth && closeDate.getFullYear() === currentYear;
+    });
+    
+    const winRate = this.getWinRate();
     
     return {
-      total: deals.length,
-      totalValue: deals.reduce((sum, deal) => sum + (deal.value || 0), 0),
-      byStage: deals.reduce((acc, deal) => {
-        acc[deal.stage] = (acc[deal.stage] || 0) + 1
-        return acc
-      }, {}),
-      winRate: this.getWinRate(),
-      averageDealSize: deals.length > 0 ? deals.reduce((sum, deal) => sum + (deal.value || 0), 0) / deals.length : 0
-    }
+      totalPipelineValue,
+      activeDealsCount,
+      monthlyClosedDealsCount: monthlyClosedDeals.length,
+      monthlyClosedDealsValue: monthlyClosedDeals.reduce((sum, deal) => sum + deal.value, 0),
+      winRate
+    };
   }
 
   async getPipelineData() {
-    await delay()
-    const stages = ['New', 'Qualified', 'Proposal', 'Negotiation', 'Won', 'Lost']
+    await this.delay();
     
-    return stages.map(stage => ({
-      stage,
-      deals: this.deals.filter(deal => deal.stage === stage),
-      totalValue: this.deals
-        .filter(deal => deal.stage === stage)
-        .reduce((sum, deal) => sum + (deal.value || 0), 0)
-    }))
+    const stages = ['Lead', 'Qualified', 'Proposal', 'Closed Won'];
+    const stageData = stages.map(stage => {
+      const stageDeals = this.deals.filter(deal => deal.stage === stage);
+      const stageValue = stageDeals.reduce((sum, deal) => sum + deal.value, 0);
+      return {
+        stage,
+        count: stageDeals.length,
+        value: stageValue
+      };
+    });
+    
+    return stageData;
   }
 
   getWinRate() {
-    const totalDeals = this.deals.length
-    if (totalDeals === 0) return 0
+    const closedDeals = this.deals.filter(deal => 
+      deal.stage === 'Closed Won' || deal.stage === 'Closed Lost'
+    );
     
-    const wonDeals = this.deals.filter(deal => deal.stage === 'Won').length
-    return Math.round((wonDeals / totalDeals) * 100)
+    if (closedDeals.length === 0) return 0;
+    
+    const wonDeals = closedDeals.filter(deal => deal.stage === 'Closed Won');
+    return Math.round((wonDeals.length / closedDeals.length) * 100);
   }
 
   async getMonthlyClosedDeals() {
-    await delay()
-    const closedDeals = this.deals.filter(deal => deal.stage === 'Won' || deal.stage === 'Lost')
+    await this.delay();
     
-    return closedDeals.reduce((acc, deal) => {
-      const month = new Date(deal.createdAt).toLocaleString('default', { month: 'short' })
-      if (!acc[month]) acc[month] = { won: 0, lost: 0 }
-      acc[month][deal.stage.toLowerCase()]++
-      return acc
-    }, {})
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+    
+    return this.deals.filter(deal => {
+      if (deal.stage !== 'Closed Won') return false;
+      const closeDate = new Date(deal.expectedCloseDate);
+      return closeDate.getMonth() === currentMonth && closeDate.getFullYear() === currentYear;
+    }).map(deal => ({ ...deal }));
   }
 }
 
-// Export instance instead of class to match expected import pattern
-const dealsService = new DealsService()
-export default dealsService
+export default new DealsService();

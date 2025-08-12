@@ -92,12 +92,7 @@ export const companiesService = {
       throw new Error('Company not found');
     }
 
-companies.splice(index, 1);
+    companies.splice(index, 1);
     return true;
-  },
-
-  // Alias method to match expected naming convention from AnalyticsPage
-  async getCompanies() {
-    return this.getAll();
   }
 };
